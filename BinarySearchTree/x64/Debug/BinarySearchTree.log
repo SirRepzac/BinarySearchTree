@@ -1,6 +1,5 @@
 ﻿  BinarySearchTree.cpp
-  Node.cpp
   Tree.cpp
   Generating Code...
-F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\Tree.cpp(27,1): warning C4715: 'Tree::FindMethod': not all control paths return a value
+F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\Tree.cpp(71,1): warning C4715: 'Tree::FindMethod': not all control paths return a value
   BinarySearchTree.vcxproj -> F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\x64\Debug\BinarySearchTree.exe

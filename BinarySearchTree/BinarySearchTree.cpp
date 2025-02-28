@@ -7,6 +7,7 @@ int main()
 {
     std::cout << "Hello World!\n";
     Node node = Node();
-    node.SetValues(1, 2, 3);
+    int k[2] = { 1, 2 };
+    node.SetValues(k);
     cout << node.ToString() << endl;
 }

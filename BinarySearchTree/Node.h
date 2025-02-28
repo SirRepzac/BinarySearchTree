@@ -1,37 +1,69 @@
 #pragma once
 #include <iostream>
+#include <string>
+#include <algorithm>
+#include <tuple>
 using namespace std;
 
-
+// Order 3, has 3 children
 class Tree;
 
 class Node
 {
 	friend Tree;
 
+public:
+	static const int keyAmount = 2;
+
+	Node();
+
+	void SetValues(int* keys);
+
+	string ToString() const;
+
+private:
 	Node* parent;
 
-	Node* childRight;
-	Node* childMiddleRight;
-	Node* childMiddleLeft;
-	Node* childLeft;
+	union
+	{
+		Node* children[keyAmount+1];
+		struct
+		{
 
-	int keyLeft;
-	int keyMiddle;
-	int keyRight;
+			Node* childLeft;
+			Node* childMiddle;
+			Node* childRight;
+		};
+	};
+
+	union
+	{
+		int keys[keyAmount];
+
+		struct
+		{
+			int keyLeft;
+			int keyRight;
+		};
+	};
 
 
 	bool IsKeyInNode(int key) const;
 
 	Node* NextNode(int key) const;
 
-public:
+	int NodeNeedsKey();
 
-	Node();
+	void AddNewKey(int key, int position);
 
-	void SetValues(int key1, int key2, int key3);
+	void SortKeys();
 
-	string ToString() const;
+	int GetMiddleKey(int* keys);
 
+	int* GetExtendedKeysSorted(int key);
+
+	tuple<int, Node*> SplitNodeInMiddle(int key);
+
+	void Restructure(int key, Node* nodes);
 
 };
