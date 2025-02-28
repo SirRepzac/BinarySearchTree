@@ -2,14 +2,16 @@
 
 Node::Node()
 {
+	keyAmount = 0;
+
 	parent = nullptr;
 
-	for (int i = 0; i < keyAmount + 1; i++)
+	for (int i = 0; i < (maxKeyAmount + 1); i++)
 	{
 		children[i] = nullptr;
 	}
 
-	for (int i = 0; i < keyAmount; i++)
+	for (int i = 0; i < maxKeyAmount; i++)
 	{
 		keys[i] = 0;
 	}
@@ -19,7 +21,7 @@ bool Node::IsKeyInNode(int key) const
 {
 	for (int i = 0; i < keyAmount; i++)
 	{
-		if (key == keys[i])
+		if (key == keys[i] && key != 0)
 		{
 			return true;
 		}
@@ -30,21 +32,21 @@ bool Node::IsKeyInNode(int key) const
 
 Node* Node::NextNode(int key) const
 {
-	if (key < keyLeft)
+	for (int i = 0; i < keyAmount; i++)
 	{
-		return childLeft;
+		if (key < keys[i])
+		{
+			return children[i];
+		}
+		else
+			return children[keyAmount];
 	}
-	else if (key < keyRight)
-	{
-		return childMiddle;
-	}
-	else
-		return childRight;
+
 }
 
 int Node::NodeNeedsKey()
 {
-	for (int i = 0; i < keyAmount; i++)
+	for (int i = 0; i < maxKeyAmount; i++)
 	{
 		if (keys[i] == 0)
 			return i;
@@ -56,148 +58,51 @@ int Node::NodeNeedsKey()
 void Node::AddNewKey(int key, int position)
 {
 	keys[position] = key;
-	SortKeys();
 }
 
 void Node::SortKeys()
 {
-    int nonZeroKeys[keyAmount];
-    int zeroKeys[keyAmount];
-    int nonZeroCount = 0;
-    int zeroCount = 0;
-
-    // Separate non-zero keys and zero keys
-    for (int i = 0; i < keyAmount; i++) {
-        if (keys[i] == 0) {
-            zeroKeys[zeroCount++] = keys[i];
-        } else {
-            nonZeroKeys[nonZeroCount++] = keys[i];
-        }
-    }
-
-    // Sort non-zero keys
-    std::sort(nonZeroKeys, nonZeroKeys + nonZeroCount);
-
-    // Merge non-zero keys and zero keys
-    int midIndex = nonZeroCount / 2;
-
-    for (int i = 0; i < midIndex; i++) {
-        keys[i] = nonZeroKeys[i];
-    }
-    for (int i = 0; i < zeroCount; i++) {
-        keys[midIndex + i] = zeroKeys[i];
-    }
-    for (int i = midIndex; i < nonZeroCount; i++) {
-        keys[zeroCount + i] = nonZeroKeys[i];
-    }
+	std::sort(keys, keys + keyAmount);
 }
 
 int Node::GetMiddleKey(int* keys)
 {
-	return keys[(keyAmount + 1) / 2];
+	return keys[(maxKeyAmount + 1) / 2];
 }
 
 int* Node::GetExtendedKeysSorted(int key)
 {
-	int allKeys[keyAmount + 1];
-	for (int i = 0; i < keyAmount; i++)
+	int allKeys[maxKeyAmount + 1];
+	for (int i = 0; i < maxKeyAmount; i++)
 	{
 		allKeys[i] = keys[i];
 	}
 
-	allKeys[keyAmount] = key;
+	allKeys[maxKeyAmount] = key;
 
-	std::sort(allKeys, allKeys + (keyAmount + 1));
+	std::sort(allKeys, allKeys + (maxKeyAmount + 1));
 	return allKeys;
 }
 
-tuple<int, Node*> Node::SplitNodeInMiddle(int key)
+bool Node::IsLeaf()
 {
+	if (this == nullptr)
+		return true;
 
-	int* allKeysOrdered = GetExtendedKeysSorted(key);
-	Node nodes[2];
-
-	int middleKey = GetMiddleKey(allKeysOrdered);
-	int leftKeys[(keyAmount + 1) / 2];
-	int rightKeys[(keyAmount + 1) / 2];
-
-
-
-	Node leftNode = Node();
-	Node rightNode = Node();
-
-	for (int i = 0; i < middleKey; i++)
+	for (int i = 0; i < maxKeyAmount + 1; i++)
 	{
-		leftKeys[i] = allKeysOrdered[i];
-		rightKeys[i] = allKeysOrdered[(middleKey + 1) + i];
-	}
-
-	leftNode.SetValues(leftKeys);
-	rightNode.SetValues(rightKeys);
-
-	nodes[0] = leftNode;
-	nodes[1] = rightNode;
-
-	return tuple<int, Node*>(middleKey, nodes);
-}
-
-void Node::Restructure(int key, Node* nodes)
-{
-	int positionToAddKey = NodeNeedsKey();
-
-	// current node isnt full
-	if (positionToAddKey != -1)
-	{
-		AddNewKey(key, positionToAddKey);
-
-		for (int i = 0; i < keyAmount; i++)
+		if (children[i] != nullptr)
 		{
-			if (key == keys[i])
-			{
-				children[i] = &nodes[0];
-				children[i + 1] = &nodes[1];
-			}
-
+			return false;
 		}
-		cout << "Key was moved to an existing node! Node: " + ToString() << endl;
-		return;
 	}
 
-	int* sorted = GetExtendedKeysSorted(key);
-
-	for (int i = 0; i < keyAmount + 1; i++)
-	{
-		if (key == sorted[i])
-		{
-			// placed to the left of middle in the new node
-			if (i < (keyAmount + 1) / 2)
-			{
-				children[i] = &nodes[0];
-			}
-			// placed to the right in the new node
-			else if (i > (keyAmount + 1) / 2)
-			{
-				children[i + 1] = &nodes[1];
-			}
-			// placed in the middle in the new node
-			else
-			{
-
-			}
-		}
-
-	}
-
-	if (parent != nullptr)
-	{
-		parent->Restructure()
-	}
-
+	return true;
 }
 
 void Node::SetValues(int* keys)
 {
-	for (int i = 0; i < keyAmount; i++)
+	for (int i = 0; i < maxKeyAmount; i++)
 	{
 		this->keys[i] = keys[i];
 	}
@@ -206,7 +111,7 @@ void Node::SetValues(int* keys)
 string Node::ToString() const
 {
 	string str = "[";
-	for (int i = 0; i < keyAmount; i++)
+	for (int i = 0; i < maxKeyAmount; i++)
 	{
 		str += to_string(keys[i]) + ", ";
 	}

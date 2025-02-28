@@ -13,7 +13,9 @@ class Node
 	friend Tree;
 
 public:
-	static const int keyAmount = 2;
+	static const int maxKeyAmount = 2;
+
+	int keyAmount;
 
 	Node();
 
@@ -26,7 +28,7 @@ private:
 
 	union
 	{
-		Node* children[keyAmount+1];
+		Node* children[maxKeyAmount+1];
 		struct
 		{
 
@@ -38,7 +40,7 @@ private:
 
 	union
 	{
-		int keys[keyAmount];
+		int keys[maxKeyAmount];
 
 		struct
 		{
@@ -62,7 +64,7 @@ private:
 
 	int* GetExtendedKeysSorted(int key);
 
-	tuple<int, Node*> SplitNodeInMiddle(int key);
+	bool IsLeaf();
 
 	void Restructure(int key, Node* nodes);
 
