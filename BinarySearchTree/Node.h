@@ -2,15 +2,17 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-#include <tuple>
+
 using namespace std;
 
 // Order 3, has 3 children
 class Tree;
+class BTreePrinter;
 
 class Node
 {
 	friend Tree;
+	friend BTreePrinter;
 
 public:
 	static const int maxKeyAmount = 2;
@@ -31,7 +33,6 @@ private:
 		Node* children[maxKeyAmount+1];
 		struct
 		{
-
 			Node* childLeft;
 			Node* childMiddle;
 			Node* childRight;
@@ -52,6 +53,26 @@ private:
 
 	bool IsKeyInNode(int key) const;
 
+	void RemoveKey(int key);
+
+	void ClearChildren();
+
+	void ClearKeys();
+
+	void SetKeyAmount();
+
+	void RemoveChild(Node* child);
+
+	void AddKeyAndChild(int key, Node* newChild, Node* oldChild);
+
+	Node* GetLeftSibling();
+
+	void Split(int key);
+
+	int GetKeyPos(int key);
+
+	int GetChildLocation(Node* child);
+
 	Node* NextNode(int key) const;
 
 	int NodeNeedsKey();
@@ -60,12 +81,13 @@ private:
 
 	void SortKeys();
 
-	int GetMiddleKey(int* keys);
+	void SortChildren();
 
-	int* GetExtendedKeysSorted(int key);
+	bool HasMaxChildren();
+
+	int GetMiddleKey(int* keys);
 
 	bool IsLeaf();
 
-	void Restructure(int key, Node* nodes);
 
 };

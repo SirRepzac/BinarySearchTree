@@ -25,6 +25,4 @@ private:
 
 	void InsertMethod(int key, Node* from);
 
-	int InsertAndSplitNode(Node* from, int key);
-
 };
