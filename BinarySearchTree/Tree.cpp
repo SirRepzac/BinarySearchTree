@@ -70,24 +70,16 @@ void Tree::InsertMethod(int key, Node* from)
 			return;
 		}
 	}
-	// If the node is full and does not have children
-	if (from->keyAmount >= Node::maxKeyAmount)
+	// If the node is a leaf
+	else
 	{
-		from->Split(key);
+		from->AddKey(key);
 		while(head->parent != nullptr)
 		{
 			head = head->parent;
 		}
 	} 
-	// If the node is not full and does not have children
-	else
-	{
-		cout << to_string(key) + " inserted against " + from->ToString();
-		from->AddNewKey(key, from->keyAmount);
-		from->keyAmount++;
-		from->SortKeys();
-		cout << " creating " + from->ToString() << endl;
-	}
+
 }
 
 Node* Tree::Find(int key)
@@ -120,7 +112,6 @@ string Tree::ToString()
 	while (!currentLevel.empty())
 	{
 		std::queue<Node*> nextLevel;
-		Node* currentParent = nullptr;
 
 		while (!currentLevel.empty())
 		{
@@ -129,14 +120,6 @@ string Tree::ToString()
 
 			if (node != nullptr)
 			{
-				if (currentParent != node->parent)
-				{
-					if (currentParent != nullptr)
-					{
-						oss << "   "; // Add space between sets of children with different parents
-					}
-					currentParent = node->parent;
-				}
 
 				oss << node->ToString() << " ";
 				for (int i = 0; i <= node->keyAmount; ++i)

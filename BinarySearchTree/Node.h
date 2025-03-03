@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <tuple>
 
 using namespace std;
 
@@ -63,11 +64,11 @@ private:
 
 	void RemoveChild(Node* child);
 
-	void AddKeyAndChild(int key, Node* newChild, Node* oldChild);
+	void AddKey(int key);
 
-	Node* GetLeftSibling();
+	Node* GetSibling();
 
-	void Split(int key);
+	tuple<int, tuple<Node*, Node*>> Split(int key);
 
 	int GetKeyPos(int key);
 
@@ -77,7 +78,7 @@ private:
 
 	int NodeNeedsKey();
 
-	void AddNewKey(int key, int position);
+	Node* GetEmptyChild();
 
 	void SortKeys();
 

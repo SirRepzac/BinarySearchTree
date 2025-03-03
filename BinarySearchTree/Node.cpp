@@ -82,49 +82,119 @@ void Node::RemoveChild(Node* child)
 	}
 }
 
-void Node::AddKeyAndChild(int key, Node* newChild, Node* oldChild)
+void Node::AddKey(int key)
 {
-	int keyPos = NodeNeedsKey();
-
 	if (keyAmount >= maxKeyAmount)
 	{
-		Split(key);
-		Node* newThis = parent->children[parent->GetChildLocation(NextNode(key))];
+		tuple<int, tuple<Node*, Node*>> items = Split(key);
+		int midKey = items._Myfirst._Val;
+		tuple<Node*, Node*> splitResults = items._Get_rest()._Myfirst._Val;
+		Node* leftSibling = splitResults._Myfirst._Val;
+		Node* rightSibling = splitResults._Get_rest()._Myfirst._Val;
 
-		ClearChildren();
-		children[0] = newChild;
-		children[1] = oldChild;
-		SortChildren();
+
+
+
+		// if this was head
+		if (parent == nullptr)
+		{
+			Node* newRoot = new Node();
+			newRoot->keys[0] = midKey;
+			newRoot->keyAmount = 1;
+			newRoot->children[0] = leftSibling;
+			newRoot->children[1] = rightSibling;
+			leftSibling->parent = newRoot;
+			rightSibling->parent = newRoot;
+			this->parent = newRoot;
+			for (int i = 0; i < maxKeyAmount + 1; i++)
+			{
+				if (children[i] != nullptr)
+				{
+					if (i < maxKeyAmount / 2)
+					{
+						children[i]->parent = leftSibling;
+					}
+					else
+					{
+						children[i]->parent = rightSibling;
+					}
+				}
+			}
+		}
+		else
+		{
+			parent->AddKey(midKey);
+			// Parent just split
+			if (parent->keyAmount == 1)
+			{
+				// If the current parent is incorrect, find the correct parent
+				if (parent->keys[0] != midKey)
+				{
+					Node* realParent = parent;
+
+					for (int i = 0; i < maxKeyAmount + 1; i++)
+					{
+						if (parent->parent->children[i] != nullptr)
+						{
+
+							if (parent->parent->children[i]->keys[0] == midKey)
+							{
+								realParent = parent->parent->children[i];
+							}
+						}
+					}
+
+					realParent->children[0] = leftSibling;
+					realParent->children[1] = rightSibling;
+					leftSibling->parent = realParent;
+					rightSibling->parent = realParent;
+				}
+				else
+				{
+
+					parent->children[0] = leftSibling;
+					parent->children[1] = rightSibling;
+					leftSibling->parent = parent;
+					rightSibling->parent = parent;
+				}
+			}
+			// Parent now has 3 children
+			else
+			{
+				parent->children[parent->GetChildLocation(this)] = nullptr;
+				parent->children[parent->GetChildLocation(nullptr)] = leftSibling;
+				parent->children[parent->GetChildLocation(nullptr)] = rightSibling;
+
+				leftSibling->parent = parent;
+				rightSibling->parent = parent;
+
+				parent->SortChildren();
+			}
+		}
+		cout << "Split to: " + leftSibling->ToString() + rightSibling->ToString() + " with parent " + leftSibling->parent->ToString() + " (using key " + to_string(key) + ")" << endl;
 	}
 	else
 	{
-		AddNewKey(key, keyPos);
+		cout << to_string(key) + " inserted against " + ToString();
+		int keyPos = NodeNeedsKey();
+		keys[keyPos] = key;
 		keyAmount++;
 		SortKeys();
 		SortChildren();
-
-		Node* newChildPosition = NextNode(newChild->keys[0]);
-		children[GetChildLocation(newChildPosition)] = newChild;
+		cout << " creating " + ToString() << endl;
 
 	}
+
+
 }
 
-Node* Node::GetLeftSibling()
-{
-	int thisChildLocation = parent->GetChildLocation(this);
-	return parent->children[thisChildLocation - 1];
-}
-
-void Node::Split(int key)
+tuple<int, tuple<Node*, Node*>> Node::Split(int key)
 {
 
 	cout << to_string(key) + ToString() + "->";
 
 	const int maxKeys = maxKeyAmount + 1;
 	int midIndex = (maxKeys) / 2;
-
-	Node* leftSibling = new Node();
-	Node* rightSibling = new Node();
 
 	// New Array with all existing keys + this new key
 	int keys[maxKeyAmount + 1];
@@ -138,6 +208,9 @@ void Node::Split(int key)
 	// Find the middle key
 	int midKey = keys[midIndex];
 
+	Node* leftSibling = new Node();
+	Node* rightSibling = new Node();
+
 	// Populate leftSibling keys
 	for (int i = 0; i < midIndex; i++)
 	{
@@ -150,13 +223,12 @@ void Node::Split(int key)
 		rightSibling->keys[i - 1] = keys[i];
 	}
 
-
+	// add children (both get the middle child)
 	for (int i = 0; i <= midIndex; i++)
 	{
 		leftSibling->children[i] = children[i];
 	}
-
-	for (int i = 0; i < keyAmount - midIndex; i++)
+	for (int i = 0; i <= maxKeyAmount - midIndex; i++)
 	{
 		rightSibling->children[i] = children[i + midIndex];
 	}
@@ -167,6 +239,7 @@ void Node::Split(int key)
 	rightSibling->SetKeyAmount();
 	rightSibling->SortKeys();
 
+	// set children's parents as these with the middle child ending up as a child to rightSibling
 	for (int i = 0; i < leftSibling->keyAmount + 1; i++)
 	{
 		if (children[i] != nullptr)
@@ -184,53 +257,20 @@ void Node::Split(int key)
 	}
 
 	cout << leftSibling->ToString() + to_string(midKey) + rightSibling->ToString() << endl;
+	
+	return tuple<int, tuple<Node*, Node*>>(midKey, tuple<Node*, Node*>(leftSibling, rightSibling));
 
-	// if this was head
-	if (parent == nullptr)
-	{
-		Node* newRoot = new Node();
-		newRoot->keys[0] = midKey;
-		newRoot->keyAmount = 1;
-		newRoot->children[0] = leftSibling;
-		newRoot->children[1] = rightSibling;
-		leftSibling->parent = newRoot;
-		rightSibling->parent = newRoot;
-		this->parent = newRoot;
-		newRoot->SortChildren();
-	}
-	// if parent does not have max children
-	else if (!parent->HasMaxChildren())
-	{
-		leftSibling->parent = parent;
-		rightSibling->parent = parent;
+}
 
-		parent->AddKeyAndChild(midKey, leftSibling, rightSibling);
-	}
-	// if this is the right childnode
-	else if (parent->GetChildLocation(NextNode(key)) > midIndex)
+Node* Node::GetSibling()
+{
+	for (int i = 0; i < maxKeyAmount; i++)
 	{
-		parent->children[parent->GetChildLocation(this)] = rightSibling;
-		AddKeyAndChild(midKey, leftSibling, rightSibling);
+		if (parent->children[i] != this && parent->children[i] != nullptr)
+		{
+			return parent->children[i];
+		}
 	}
-	// if this is the left childnode
-	else if (parent->GetChildLocation(NextNode(key)) < midIndex)
-	{
-		parent->children[parent->GetChildLocation(this)] = leftSibling;
-		AddKeyAndChild(midKey, rightSibling, leftSibling);
-	}
-	// if this is the middle childnode
-	else
-	{
-		parent->Split(midKey);
-
-		parent->children[0] = rightSibling;
-		rightSibling->parent = parent;
-
-		Node* parentLeftSibling = parent->GetLeftSibling();
-		parentLeftSibling->children[1] = leftSibling;
-		leftSibling->parent = parentLeftSibling;
-	}
-	std::cout << "Split to: " + leftSibling->ToString() + rightSibling->ToString() + " with parent " + leftSibling->parent->ToString() << endl;
 }
 
 int Node::GetKeyPos(int key)
@@ -282,9 +322,15 @@ int Node::NodeNeedsKey()
 	return -1;
 }
 
-void Node::AddNewKey(int key, int position)
+Node* Node::GetEmptyChild()
 {
-	keys[position] = key;
+	for (int i = 0; i < maxKeyAmount + 1; i++)
+	{
+		if (children[i] == nullptr)
+		{
+			return children[i];
+		}
+	}
 }
 
 void Node::SortKeys()
