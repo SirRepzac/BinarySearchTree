@@ -1,5 +1,2 @@
-﻿  Node.cpp
-F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\Node.cpp(79,16): warning C4553: '==': result of expression not used; did you intend '='?
-F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\Node.cpp(274,1): warning C4715: 'Node::GetSibling': not all control paths return a value
-F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\Node.cpp(334,1): warning C4715: 'Node::GetEmptyChild': not all control paths return a value
+﻿  BinarySearchTree.cpp
   BinarySearchTree.vcxproj -> F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\x64\Debug\BinarySearchTree.exe

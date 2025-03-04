@@ -1,41 +1,26 @@
 #include <iostream>
-#include "Tree.h"
+#include "BTreeTree.h"
+#include "BSTTree.h"
 
 
 using namespace std;
 
 int main()
 {
-    Tree t = Tree();
+    //BTreeTree t = BTreeTree();
+    BSTTree t = BSTTree();
 
     srand(29324);
 
-    for (unsigned i = 0; i < 15; ++i)
+    int numbers[] = {4, 7, 6, 8, 9, 1, 2, 5, 3};
+
+    for (unsigned i = 0; i < 9; ++i)
     {
-        int p = rand() % 100;
+        int p = numbers[i];
         std::cout << "\n## inserting " << p << "...\n\n";
         t.Insert(p);
+        cout << "Tree looks like: \n" + t.ToString() << endl;
     }
-
-    //std::cout << "Hello World!\n";
-    //Tree tree = Tree();
-    //tree.Insert(1);
-    //tree.Insert(6);
-    //tree.Insert(3);
-    //tree.Insert(5);
-    //tree.Insert(7);
-    //tree.Insert(2);
-    //tree.Insert(9);
-    //tree.Insert(11);
-    //tree.Insert(4);
-    //tree.Insert(8);
-    //tree.Insert(13);
-    //tree.Insert(12);
-    //tree.Insert(14);
-    //tree.Insert(15);
-    //cout << endl;
-    //cout << "-----" << endl;
-    //cout << endl;
-
-    //cout << tree.ToString() << endl;
+    t.Delete(6);
+    cout << "Tree looks like: \n" + t.ToString() << endl;
 }
