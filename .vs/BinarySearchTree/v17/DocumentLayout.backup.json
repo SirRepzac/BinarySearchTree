@@ -3,24 +3,30 @@
   "WorkspaceRootPath": "F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BSTTree.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|solutionrelative:BinarySearchTree\\BSTTree.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BSTNode.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|solutionrelative:BinarySearchTree\\BSTNode.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BSTTree.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|solutionrelative:BinarySearchTree\\BSTTree.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\include\\vector||{3B902123-F8A7-4915-9F01-361F908088D0}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BinarySearchTree.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|solutionrelative:BinarySearchTree\\BinarySearchTree.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\include\\xstring||{3B902123-F8A7-4915-9F01-361F908088D0}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BSTNode.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|solutionrelative:BinarySearchTree\\BSTNode.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BinarySearchTree.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|solutionrelative:BinarySearchTree\\BinarySearchTree.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BSTTree.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|solutionrelative:BinarySearchTree\\BSTTree.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BSTNode.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|solutionrelative:BinarySearchTree\\BSTNode.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DA79918D-F43B-4ADB-8B27-947DF2836AFE}|BinarySearchTree\\BinarySearchTree.vcxproj|F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BTreeTree.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -46,50 +52,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "vector",
+              "DocumentMoniker": "F:\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\include\\vector",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\include\\vector",
+              "ToolTip": "F:\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\include\\vector",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\include\\vector",
+              "ViewState": "AgIAAD8HAAAAAAAAAAAvwF8HAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-05T14:24:59.223Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "xstring",
+              "DocumentMoniker": "F:\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\include\\xstring",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\include\\xstring",
+              "ToolTip": "F:\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\include\\xstring",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\include\\xstring",
+              "ViewState": "AgIAAK8IAAAAAAAAAAAvwM8IAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-05T13:26:53.574Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "BSTTree.cpp",
               "DocumentMoniker": "F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BSTTree.cpp",
               "RelativeDocumentMoniker": "BinarySearchTree\\BSTTree.cpp",
               "ToolTip": "F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BSTTree.cpp",
               "RelativeToolTip": "BinarySearchTree\\BSTTree.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAMIAAAAAAAAAAAAvwA0BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-04T09:46:01.086Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "BSTTree.h",
               "DocumentMoniker": "F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BSTTree.h",
               "RelativeDocumentMoniker": "BinarySearchTree\\BSTTree.h",
               "ToolTip": "F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BSTTree.h",
               "RelativeToolTip": "BinarySearchTree\\BSTTree.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAiwBgAAABnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-03-04T09:34:52.525Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "BSTNode.cpp",
               "DocumentMoniker": "F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BSTNode.cpp",
               "RelativeDocumentMoniker": "BinarySearchTree\\BSTNode.cpp",
               "ToolTip": "F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BSTNode.cpp",
               "RelativeToolTip": "BinarySearchTree\\BSTNode.cpp",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAiwHEAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAvwH8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-04T09:37:08.102Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "BSTNode.h",
               "DocumentMoniker": "F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BSTNode.h",
               "RelativeDocumentMoniker": "BinarySearchTree\\BSTNode.h",
@@ -102,7 +134,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "BTreeTree.h",
               "DocumentMoniker": "F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BTreeTree.h",
               "RelativeDocumentMoniker": "BinarySearchTree\\BTreeTree.h",
@@ -110,12 +142,11 @@
               "RelativeToolTip": "BinarySearchTree\\BTreeTree.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-04T09:29:57.353Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T09:29:57.353Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "BTreeTree.cpp",
               "DocumentMoniker": "F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BTreeTree.cpp",
               "RelativeDocumentMoniker": "BinarySearchTree\\BTreeTree.cpp",
@@ -123,12 +154,11 @@
               "RelativeToolTip": "BinarySearchTree\\BTreeTree.cpp",
               "ViewState": "AgIAAFcAAAAAAAAAAAAAAGgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-02-28T07:57:55.869Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T07:57:55.869Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "BTreeNode.cpp",
               "DocumentMoniker": "F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BTreeNode.cpp",
               "RelativeDocumentMoniker": "BinarySearchTree\\BTreeNode.cpp",
@@ -136,12 +166,11 @@
               "RelativeToolTip": "BinarySearchTree\\BTreeNode.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAALsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-02-28T07:53:35.823Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T07:53:35.823Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "BTreeNode.h",
               "DocumentMoniker": "F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BTreeNode.h",
               "RelativeDocumentMoniker": "BinarySearchTree\\BTreeNode.h",
@@ -149,18 +178,17 @@
               "RelativeToolTip": "BinarySearchTree\\BTreeNode.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-02-28T07:47:18.451Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T07:47:18.451Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "BinarySearchTree.cpp",
               "DocumentMoniker": "F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BinarySearchTree.cpp",
               "RelativeDocumentMoniker": "BinarySearchTree\\BinarySearchTree.cpp",
               "ToolTip": "F:\\LTU\\_Programming_\\Year-1\\Datastructures_And_Algorithms\\Lab-3\\BinarySearchTree\\BinarySearchTree\\BinarySearchTree.cpp",
               "RelativeToolTip": "BinarySearchTree\\BinarySearchTree.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-02-28T07:46:02.171Z",
               "EditorCaption": ""

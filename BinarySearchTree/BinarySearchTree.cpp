@@ -12,9 +12,9 @@ int main()
 
     srand(29324);
 
-    int numbers[] = {4, 7, 6, 8, 9, 1, 2, 5, 3};
+    int numbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
 
-    for (unsigned i = 0; i < 9; ++i)
+    for (unsigned i = 0; i < 18; ++i)
     {
         int p = numbers[i];
         std::cout << "\n## inserting " << p << "...\n\n";

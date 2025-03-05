@@ -103,7 +103,7 @@ void BSTNode::DeleteChild(BSTNode* child)
 int BSTNode::GetNodeAmount()
 {
 	int nodeAmount = 1;
-	if (IsLeaf)
+	if (IsLeaf())
 	{
 		return 1;
 	}

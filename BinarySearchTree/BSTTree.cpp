@@ -1,6 +1,7 @@
 #include "BSTTree.h"
 #include <queue>
 #include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -33,7 +34,7 @@ void BSTTree::Insert(int key)
 	{
 		BSTNode* newHead = new BSTNode(key);
 		head = newHead;
-		cout << "Created new head with key" + to_string(key) << endl;
+		cout << "Created new head with key: " + to_string(key) << endl;
 	}
 	else
 	{
@@ -41,6 +42,9 @@ void BSTTree::Insert(int key)
 		cout << "-----Insertion complete-----" << endl;
 		
 	}
+
+	if (CheckIfRebalanceIsNeeded(head))
+		Rebalance();
 }
 
 void BSTTree::InsertAlgo(int key, BSTNode* currentNode)
@@ -60,7 +64,7 @@ void BSTTree::InsertAlgo(int key, BSTNode* currentNode)
 	}
 	else
 	{
-		cout << "Going into child of " + currentNode->ToString() + "..." << endl;
+		cout << "Going into child " + currentNode->ToString() + "->" + nextNode->ToString() << endl;
 		InsertAlgo(key, nextNode);
 	}
 }
@@ -68,145 +72,205 @@ void BSTTree::InsertAlgo(int key, BSTNode* currentNode)
 void BSTTree::Delete(int key)
 {
 	BSTNode* nodeWithKey = Find(key);
-	Delete(nodeWithKey);
-}
 
-void BSTTree::Delete(BSTNode* node)
-{
-	if (node == nullptr)
+	if (nodeWithKey == nullptr)
 	{
 		cout << "Key not found" << endl;
 		return;
 	}
-	else
-	{
-		cout << "Deleting " + node->ToString() << endl;
 
-		// The node being deleted has no children
-		if (node->IsLeaf())
+	cout << "Deleting " + to_string(key) << endl;
+	Delete(nodeWithKey);
+
+	if (CheckIfRebalanceIsNeeded(head))
+		Rebalance();
+}
+
+void BSTTree::Delete(BSTNode* node)
+{
+	// The node being deleted has no children
+	if (node->IsLeaf())
+	{
+		if (node == head)
+		{
+			head = nullptr;
+		}
+		else
+		{
+			node->parent->DeleteChild(node);
+
+		}
+
+		delete node;
+		return;
+	}
+	// The node being deleted has 1 child
+	else if (node->ChildAmount() == 1)
+	{
+		if (node->leftChild == nullptr)
 		{
 			if (node == head)
 			{
-				head = nullptr;
+				head = node->rightChild;
+				node->rightChild->parent = nullptr;
 			}
 			else
 			{
-				node->parent->DeleteChild(node);
-
+				node->rightChild->parent = node->parent;
+				int nodeWithKeyId = node->parent->GetChildId(node);
+				node->parent->children[nodeWithKeyId] = node->rightChild;
 			}
-
-			delete node;
-			return;
 		}
-		// The node being deleted has 1 child
-		else if (node->ChildAmount() == 1)
-		{
-			if (node->leftChild == nullptr)
-			{
-				if (node == head)
-				{
-					head = node->rightChild;
-					node->rightChild->parent = nullptr;
-				}
-				else
-				{
-					node->rightChild->parent = node->parent;
-					int nodeWithKeyId = node->parent->GetChildId(node);
-					node->parent->children[nodeWithKeyId] = node->rightChild;
-				}
-			}
-			else
-			{
-				if (node == head)
-				{
-					head = node->leftChild;
-					node->leftChild->parent = nullptr;
-				}
-				else
-				{
-					node->leftChild->parent = node->parent;
-					int nodeWithKeyId = node->parent->GetChildId(node);
-					node->parent->children[nodeWithKeyId] = node->leftChild;
-				}
-			}
-
-			delete node;
-			return;
-		}
-		// The node being deleted has 2 children
 		else
 		{
-			// Swap value with the smallest node in the right subtree
-
-			BSTNode* smallestInRightSubtree = node->rightChild->GetSmallest();
-			node->key = smallestInRightSubtree->key;
-			Delete(smallestInRightSubtree);
+			if (node == head)
+			{
+				head = node->leftChild;
+				node->leftChild->parent = nullptr;
+			}
+			else
+			{
+				node->leftChild->parent = node->parent;
+				int nodeWithKeyId = node->parent->GetChildId(node);
+				node->parent->children[nodeWithKeyId] = node->leftChild;
+			}
 		}
+
+		delete node;
+		return;
+	}
+	// The node being deleted has 2 children
+	else
+	{
+		// Swap value with the smallest node in the right subtree
+
+		BSTNode* smallestInRightSubtree = node->rightChild->GetSmallest();
+		node->key = smallestInRightSubtree->key;
+		Delete(smallestInRightSubtree);
 	}
 }
 
 bool BSTTree::CheckIfRebalanceIsNeeded(BSTNode* node)
 {
+	// If node is a leaf (bottom of the tree)
 	if (node->IsLeaf())
 	{
 		return false;
 	}
-	else if (node->ChildAmount() == 1)
-	{
-		if (node->rightChild == nullptr)
-			return CheckIfRebalanceIsNeeded(node->leftChild);
-		else
-			return CheckIfRebalanceIsNeeded(node->rightChild);
-	}
+	// If node has children
 	else
 	{
 		int nodeAmount = node->GetNodeAmount();
 
-		if (node->leftChild != nullptr && node->leftChild->GetNodeAmount() > c * nodeAmount)
-			return true;
-		if (node->rightChild != nullptr && node->rightChild->GetNodeAmount() > c * nodeAmount)
-			return true;
+		if (node->leftChild != nullptr)
+		{
+			if (node->leftChild->GetNodeAmount() > c * nodeAmount)
+			{
+				return true;
+			}
+			if (CheckIfRebalanceIsNeeded(node->leftChild))
+			{
+				return true;
+			}
+		}
 
-		if (CheckIfRebalanceIsNeeded(node->leftChild) == true || CheckIfRebalanceIsNeeded(node->rightChild) == true)
-			return true;
-		else
-			return false;
+		if (node->rightChild != nullptr)
+		{
+
+			if (node->rightChild->GetNodeAmount() > c * nodeAmount)
+			{
+				return true;
+			}
+			if (CheckIfRebalanceIsNeeded(node->rightChild))
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
 
+void BSTTree::InOrderTraversal(BSTNode* node, vector<BSTNode*>& nodes)
+{
+	if (node == nullptr)
+		return;
 
+	InOrderTraversal(node->leftChild, nodes);
+	nodes.push_back(node);
+	InOrderTraversal(node->rightChild, nodes);
+}
 
+BSTNode* BSTTree::BuildBalancedTree(vector<BSTNode*>& nodes, int start, int end)
+{
+	if (start > end)
+		return nullptr;
 
+	int mid = start + (end - start) / 2;
+	BSTNode* node = nodes[mid];
+
+	node->leftChild = BuildBalancedTree(nodes, start, mid - 1);
+	if (node->leftChild != nullptr)
+		node->leftChild->parent = node;
+
+	node->rightChild = BuildBalancedTree(nodes, mid + 1, end);
+	if (node->rightChild != nullptr)
+		node->rightChild->parent = node;
+
+	return node;
+}
+
+void BSTTree::Rebalance()
+{
+	cout << "Rebalancing tree..." << endl;
+	vector<BSTNode*> nodes;
+	InOrderTraversal(head, nodes);
+
+	head = BuildBalancedTree(nodes, 0, nodes.size() - 1);
+
+}
+
+void BSTTree::InOrderTraversalWithDepth(BSTNode* node, vector<pair<BSTNode*, int>>& nodesWithDepth, int depth)
+{
+	if (node == nullptr)
+		return;
+
+	InOrderTraversalWithDepth(node->leftChild, nodesWithDepth, depth + 1);
+	nodesWithDepth.push_back({ node, depth });
+	InOrderTraversalWithDepth(node->rightChild, nodesWithDepth, depth + 1);
+}
 
 string BSTTree::ToString()
 {
-	std::ostringstream oss;
 	if (head == nullptr)
-		return oss.str();
+		return "Tree is empty";
 
-	std::queue<BSTNode*> currentLevel;
-	currentLevel.push(head);
+	int depth = head->GetHeight() + 1;
+	vector<string> strVec(depth);
+	vector<vector<int>> width(depth);
+	int maxWidth = 0;
 
-	while (!currentLevel.empty())
+	vector<pair<BSTNode*, int>> nodesWithDepth;
+	InOrderTraversalWithDepth(head, nodesWithDepth, 0);
+
+	for (const auto& nodeWithDepth : nodesWithDepth)
 	{
-		std::queue<BSTNode*> nextLevel;
-
-		while (!currentLevel.empty())
-		{
-			BSTNode* node = currentLevel.front();
-			currentLevel.pop();
-
-			if (node != nullptr)
-			{
-				oss << node->ToString() << " ";
-				nextLevel.push(node->leftChild);
-				nextLevel.push(node->rightChild);
-			}
-		}
-		oss << "\n";
-		currentLevel = nextLevel;
+		string s = nodeWithDepth.first->ToString();
+		strVec[nodeWithDepth.second] += s + " ";
+		width[nodeWithDepth.second].push_back(s.length());
+		if (s.length() > maxWidth)
+			maxWidth = s.length();
 	}
 
-	return oss.str();
+	string str = "";
+
+	for (int i = 0; i < strVec.size(); i++)
+	{
+		str += "\n";
+
+		str += strVec[i];
+	}
+
+	return str;
 }
 
