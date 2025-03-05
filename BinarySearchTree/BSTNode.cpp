@@ -21,20 +21,16 @@ BSTNode::BSTNode(int key)
 int BSTNode::ChildAmount()
 {
 	int counter = 0;
-	for (int i = 0; i < 2; i++)
-	{
-		if (children[i] != nullptr)
-			counter++;
-	}
+	if (leftChild != nullptr)
+		counter++;
+	if (rightChild != nullptr)
+		counter++;
 	return counter;
 }
 
 bool BSTNode::IsLeaf()
 {
-	if (ChildAmount() == 0)
-		return true;
-	else
-		return false;
+	return ChildAmount() == 0;
 }
 
 int BSTNode::GetHeight()
@@ -64,25 +60,20 @@ int BSTNode::GetHeight()
 BSTNode* BSTNode::GetNextNode(int key)
 {
 
-	return children[GetNextNodeId(key)];
+	return key < this->key ? leftChild : rightChild;
 }
 
 int BSTNode::GetNextNodeId(int key)
 {
-	if (key < this->key)
-		return 0;
-	else
-		return 1;
+	return key < this->key ? 0 : 1;
 }
 
 int BSTNode::GetChildId(BSTNode* node)
 {
-	for (int i = 0; i < 2; i++)
-	{
-		if (children[i] == node)
-			return i;
-	}
-
+	if (leftChild == node)
+		return 0;
+	if (rightChild == node)
+		return 1;
 	return -1;
 }
 
@@ -91,35 +82,32 @@ void BSTNode::SetNewChild(int newKey)
 	int childId = GetNextNodeId(newKey);
 	BSTNode* node = new BSTNode(newKey);
 	node->parent = this;
-	children[childId] = node;
+	if (childId == 0)
+		leftChild = node;
+	else
+		rightChild = node;
 }
 
 void BSTNode::DeleteChild(BSTNode* child)
 {
-	
-	children[GetChildId(child)] = nullptr;
+	if (leftChild == child)
+		leftChild = nullptr;
+	else if (rightChild == child)
+		rightChild = nullptr;
 }
 
 int BSTNode::GetNodeAmount()
 {
 	int nodeAmount = 1;
-	if (IsLeaf())
+	if (leftChild != nullptr)
 	{
-		return 1;
+		nodeAmount += leftChild->GetNodeAmount();
 	}
-	else
+	if (rightChild != nullptr)
 	{
-		if (rightChild != nullptr)
-		{
-			nodeAmount += rightChild->GetNodeAmount();
-		}
-		if (leftChild != nullptr)
-		{
-			nodeAmount += leftChild->GetNodeAmount();
-		}
-
-		return nodeAmount;
+		nodeAmount += rightChild->GetNodeAmount();
 	}
+	return nodeAmount;
 }
 
 string BSTNode::ToString()
@@ -129,12 +117,5 @@ string BSTNode::ToString()
 
 BSTNode* BSTNode::GetSmallest()
 {
-	if (leftChild == nullptr)
-	{
-		return this;
-	}
-	else
-	{
-		return leftChild->GetSmallest();
-	}
+	return leftChild == nullptr ? this : leftChild->GetSmallest();
 }

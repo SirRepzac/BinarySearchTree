@@ -15,15 +15,8 @@ class BSTNode
 
 	BSTNode* parent;
 
-	union
-	{
-		BSTNode* children[2];
-		struct
-		{
-			BSTNode* leftChild;
-			BSTNode* rightChild;
-		};
-	};
+	BSTNode* leftChild;
+	BSTNode* rightChild;
 
 	BSTNode();
 	BSTNode(int key);

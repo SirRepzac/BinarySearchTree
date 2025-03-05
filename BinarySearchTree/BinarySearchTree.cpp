@@ -13,6 +13,7 @@ int main()
     srand(29324);
 
     int numbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
+    int delnumbers[] = {6, 5, 2, 9, 8};
 
     for (unsigned i = 0; i < 18; ++i)
     {
@@ -21,6 +22,11 @@ int main()
         t.Insert(p);
         cout << "Tree looks like: \n" + t.ToString() << endl;
     }
-    t.Delete(6);
-    cout << "Tree looks like: \n" + t.ToString() << endl;
+    for (unsigned i = 0; i < 5; ++i)
+    {
+        int p = delnumbers[i];
+        std::cout << "\n## deleting " << p << "...\n\n";
+        t.Delete(p);
+        cout << "Tree looks like: \n" + t.ToString() << endl;
+    }
 }
