@@ -31,6 +31,8 @@ class BSTNode
 	BSTNode* GetNextNode(int key);
 	int GetNextNodeId(int key);
 
+	int GetNodeAmount();
+
 	int GetChildId(BSTNode* node);
 
 	void SetNewChild(int newKey);
