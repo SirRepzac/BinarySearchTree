@@ -4,6 +4,7 @@ using namespace std;
 
 BSTNode::BSTNode()
 {
+	nodeAmount = 0;
 	this->key = 0;
 	parent = nullptr;
 	leftChild = nullptr;
@@ -12,6 +13,7 @@ BSTNode::BSTNode()
 
 BSTNode::BSTNode(int key)
 {
+	nodeAmount = 0;
 	this->key = key;
 	parent = nullptr;
 	leftChild = nullptr;
@@ -96,19 +98,19 @@ void BSTNode::DeleteChild(BSTNode* child)
 		rightChild = nullptr;
 }
 
-int BSTNode::GetNodeAmount()
-{
-	int nodeAmount = 1;
-	if (leftChild != nullptr)
-	{
-		nodeAmount += leftChild->GetNodeAmount();
-	}
-	if (rightChild != nullptr)
-	{
-		nodeAmount += rightChild->GetNodeAmount();
-	}
-	return nodeAmount;
-}
+//int BSTNode::GetNodeAmount()
+//{
+//	int nodeAmount = 1;
+//	if (leftChild != nullptr)
+//	{
+//		nodeAmount += leftChild->GetNodeAmount();
+//	}
+//	if (rightChild != nullptr)
+//	{
+//		nodeAmount += rightChild->GetNodeAmount();
+//	}
+//	return nodeAmount;
+//}
 
 string BSTNode::ToString()
 {	

@@ -30,3 +30,5 @@ int main()
         cout << "Tree looks like: \n" + t.ToString() << endl;
     }
 }
+
+//TODO: Make each node know how many nodes are beneath them at all times (update parents when inserting)

@@ -32,13 +32,10 @@ void BSTTree::Insert(int key)
 	{
 		BSTNode* newHead = new BSTNode(key);
 		head = newHead;
-		cout << "Created new head with key: " + to_string(key) << endl;
 	}
 	else
 	{
 		InsertAlgo(key, head);
-		cout << "-----Insertion complete-----" << endl;
-		
 	}
 
 	if (CheckIfRebalanceIsNeeded(head))
@@ -49,7 +46,6 @@ void BSTTree::InsertAlgo(int key, BSTNode* currentNode)
 {
 	if (key == currentNode->key)
 	{
-		cout << "Key already in tree" << endl;
 		return;
 	}
 
@@ -58,11 +54,9 @@ void BSTTree::InsertAlgo(int key, BSTNode* currentNode)
 	if (nextNode == nullptr)
 	{
 		currentNode->SetNewChild(key);
-		cout << "Set new child of " + currentNode->ToString() + " to " + to_string(key) << endl;
 	}
 	else
 	{
-		cout << "Going into child " + currentNode->ToString() + "->" + nextNode->ToString() << endl;
 		InsertAlgo(key, nextNode);
 	}
 }
@@ -73,13 +67,11 @@ void BSTTree::Delete(int key)
 
 	if (nodeWithKey == nullptr)
 	{
-		cout << "Key not found" << endl;
 		return;
 	}
 
 	
 	Delete(nodeWithKey);
-	cout << "----Delete complete----" << endl;
 
 	if (CheckIfRebalanceIsNeeded(head))
 		Rebalance();
@@ -99,7 +91,6 @@ void BSTTree::Delete(BSTNode* node)
 			node->parent->DeleteChild(node);
 		}
 
-		cout << "Removing " + node->ToString() << endl;
 		delete node;
 		return;
 	}
@@ -120,7 +111,6 @@ void BSTTree::Delete(BSTNode* node)
 				node->parent->leftChild = child;
 			else
 				node->parent->rightChild = child;
-			cout << "Replacing " + node->ToString() + " with child: " + child->ToString() << endl;
 		}
 		delete node;
 		return;
@@ -130,9 +120,21 @@ void BSTTree::Delete(BSTNode* node)
 	{
 		// Swap value with the smallest node in the right subtree
 		BSTNode* smallestInRightSubtree = node->rightChild->GetSmallest();
-		cout << "Swapping value with " + smallestInRightSubtree->ToString() << endl;
 		node->key = smallestInRightSubtree->key;
 		Delete(smallestInRightSubtree);
+	}
+}
+
+void BSTTree::DeleteTree()
+{
+	vector<BSTNode*> nodes;
+
+	InOrderTraversal(head, nodes);
+
+	for (int i = 0; i < nodes.size(); i++)
+	{
+		delete &nodes.back();
+		nodes.pop_back();
 	}
 }
 
@@ -146,11 +148,9 @@ bool BSTTree::CheckIfRebalanceIsNeeded(BSTNode* node)
 	// If node has children
 	else
 	{
-		int nodeAmount = node->GetNodeAmount();
-
 		if (node->leftChild != nullptr)
 		{
-			if (node->leftChild->GetNodeAmount() > c * nodeAmount)
+			if (node->leftChild->nodeAmount > c * node->nodeAmount)
 			{
 				return true;
 			}
@@ -163,7 +163,7 @@ bool BSTTree::CheckIfRebalanceIsNeeded(BSTNode* node)
 		if (node->rightChild != nullptr)
 		{
 
-			if (node->rightChild->GetNodeAmount() > c * nodeAmount)
+			if (node->rightChild->nodeAmount > c * node->nodeAmount)
 			{
 				return true;
 			}
@@ -209,7 +209,6 @@ BSTNode* BSTTree::BuildBalancedTree(vector<BSTNode*>& nodes, int start, int end)
 
 void BSTTree::Rebalance()
 {
-	cout << "Rebalancing tree..." << endl;
 	vector<BSTNode*> nodes;
 	// First make an in order traversal to get all the nodes in order
 	InOrderTraversal(head, nodes);
@@ -218,8 +217,6 @@ void BSTTree::Rebalance()
 	// then keep making the middle between start and current node as the left child and the middle between current node and stop as the right child 
 	head = BuildBalancedTree(nodes, 0, nodes.size() - 1);
 	head->parent = nullptr;
-	cout << "----Rebalance complete----" << endl;
-
 }
 
 void BSTTree::InOrderTraversalWithDepth(BSTNode* node, vector<pair<BSTNode*, int>>& nodesWithDepth, int depth)

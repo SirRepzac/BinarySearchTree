@@ -13,6 +13,8 @@ class BSTNode
 	friend BSTTree;
 	int key;
 
+	int nodeAmount;
+
 	BSTNode* parent;
 
 	BSTNode* leftChild;
@@ -33,8 +35,6 @@ class BSTNode
 
 	void SetNewChild(int newKey);
 	void DeleteChild(BSTNode* child);
-
-	int GetNodeAmount();
 
 	string ToString();
 

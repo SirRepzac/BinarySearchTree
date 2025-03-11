@@ -21,8 +21,8 @@ class BSTTree
 
 	BSTNode* BuildBalancedTree(vector<BSTNode*>& nodes, int start, int end);
 
-	void Rebalance(); // Not yet implemented
-	void InOrderTraversalWithDepth(BSTNode* node, vector<pair<BSTNode*, int>>& nodesWithDepth, int depth);
+	void Rebalance();
+
 
 public:
 	BSTTree();
@@ -30,7 +30,12 @@ public:
 	void Insert(int key);
 	void Delete(int key);
 	void Delete(BSTNode* node);
+	void DeleteTree();
+
+
+
+	// Only for printing
 	string ToString();
-
-
+private:
+	void InOrderTraversalWithDepth(BSTNode* node, vector<pair<BSTNode*, int>>& nodesWithDepth, int depth);
 };
