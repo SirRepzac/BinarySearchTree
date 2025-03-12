@@ -38,8 +38,11 @@ void BSTTree::Insert(int key)
 		InsertAlgo(key, head);
 	}
 
-	if (CheckIfRebalanceIsNeeded(head))
-		Rebalance();
+	if (isBalancedTree)
+	{
+		if (CheckIfRebalanceIsNeeded(head))
+			Rebalance();
+	}
 }
 
 void BSTTree::InsertAlgo(int key, BSTNode* currentNode)
@@ -79,7 +82,6 @@ void BSTTree::Delete(int key)
 		return;
 	}
 
-	
 	Delete(nodeWithKey);
 
 	if (CheckIfRebalanceIsNeeded(head))
@@ -110,6 +112,7 @@ void BSTTree::Delete(BSTNode* node)
 		delete node;
 		return;
 	}
+
 	// The node being deleted has 1 child, relocate the child to the deleted values position
 	else if (node->ChildAmount() == 1)
 	{
@@ -221,13 +224,23 @@ BSTNode* BSTTree::BuildBalancedTree(vector<BSTNode*>& nodes, int start, int end)
 	int mid = start + (end - start) / 2;
 	BSTNode* node = nodes[mid];
 
+	node->nodeAmount = 0;
+
 	node->leftChild = BuildBalancedTree(nodes, start, mid - 1);
 	if (node->leftChild != nullptr)
+	{
 		node->leftChild->parent = node;
+		node->nodeAmount += node->leftChild->nodeAmount;
+	}
 
 	node->rightChild = BuildBalancedTree(nodes, mid + 1, end);
 	if (node->rightChild != nullptr)
+	{
 		node->rightChild->parent = node;
+		node->nodeAmount += node->rightChild->nodeAmount;
+	}
+
+	node->nodeAmount += 1;
 
 	return node;
 }
@@ -254,37 +267,51 @@ void BSTTree::InOrderTraversalWithDepth(BSTNode* node, vector<pair<BSTNode*, int
 	InOrderTraversalWithDepth(node->rightChild, nodesWithDepth, depth + 1);
 }
 
+// Doesnt work
 string BSTTree::ToString()
 {
 	if (head == nullptr)
 		return "Tree is empty";
 
-	int depth = head->GetHeight() + 1;
-	vector<string> strVec(depth);
+	int depth = min(head->GetHeight() + 1, 5); // Limit to top 5 layers
+	vector<string> strVec(5, "");
 	vector<vector<int>> width(depth);
 	int maxWidth = 0;
 
 	vector<pair<BSTNode*, int>> nodesWithDepth;
 	InOrderTraversalWithDepth(head, nodesWithDepth, 0);
 
+	if (nodesWithDepth.empty())
+	{
+		return "Tree exists but no nodes were found.\n";
+	}
+
 	for (const auto& nodeWithDepth : nodesWithDepth)
 	{
-		string s = nodeWithDepth.first->ToString();
-		strVec[nodeWithDepth.second] += s + " ";
-		width[nodeWithDepth.second].push_back(s.length());
-		if (s.length() > maxWidth)
-			maxWidth = s.length();
+		if (nodeWithDepth.second >= 5) // Skip nodes deeper than 5 layers
+			break;
+
+		cout << "Adding node to level " << nodeWithDepth.second << ": " << nodeWithDepth.first->ToString() << endl;
+
+		strVec[nodeWithDepth.second] += nodeWithDepth.first->ToString() + " ";
+
+		//string s = nodeWithDepth.first->ToString();
+		//strVec[nodeWithDepth.second] += s + " ";
+		//width[nodeWithDepth.second].push_back(s.length());
+		//if (s.length() > maxWidth)
+		//	maxWidth = s.length();
 	}
 
-	string str = "";
-
-	for (int i = 0; i < strVec.size(); i++)
+	string str;
+	for (int i = 0; i < 5; i++)  // Only up to depth 5
 	{
-		str += "\n";
-
-		str += strVec[i];
+		if (!strVec[i].empty())
+		{
+			str += "Level " + to_string(i) + ": " + strVec[i] + "\n";
+		}
 	}
 
+	cout << "Debug: Tree string -> " << str << endl;
 	return str;
 }
 

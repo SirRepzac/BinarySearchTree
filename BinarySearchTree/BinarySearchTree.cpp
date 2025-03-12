@@ -6,8 +6,9 @@
 
 using namespace std::chrono;
 using namespace std;
-int x = 100000;
+int x = 10000;
 int cycle_test = 1000;
+
 int main()
 {
     double total_time = 0;
@@ -25,9 +26,7 @@ int main()
     for (unsigned z = 0; z < cycle_test; ++z) {
 
         t.DeleteTree();
-        t;
       
-        //generate(values.begin(), values.end(), generateRandom);
         auto start = high_resolution_clock::now();
         for (unsigned i = 0; i < x; ++i)
         {
@@ -38,8 +37,37 @@ int main()
         auto duration = duration_cast<microseconds>(stop - start);
         total_time += duration.count();
     }
-    t.ToString();
-    cout << "Average time: " << (total_time / cycle_test) / 1'000'000 << " seconds" << endl;
-}
 
-//TODO: Fix tree!
+    cout << "Average time (balanced): " << (total_time / cycle_test) / 1'000'000 << " seconds" << endl;
+
+    total_time = 0;
+    BSTTree u = BSTTree();
+    u.isBalancedTree = false;
+    vector<int> values2;
+
+    srand(time(NULL));
+
+    for (int i = 0; i < x; i++)
+    {
+        int random = rand() % x;
+        values2.push_back(random);
+    }
+
+    for (unsigned z = 0; z < cycle_test; ++z)
+    {
+
+        u.DeleteTree();
+
+        auto start = high_resolution_clock::now();
+        for (unsigned i = 0; i < x; ++i)
+        {
+            int p = values2[i];
+            u.Insert(p);
+        }
+        auto stop = high_resolution_clock::now();
+        auto duration = duration_cast<microseconds>(stop - start);
+        total_time += duration.count();
+    }
+
+    cout << "Average time (unbalanced): " << (total_time / cycle_test) / 1'000'000 << " seconds" << endl;
+}

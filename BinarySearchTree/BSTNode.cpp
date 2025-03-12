@@ -98,20 +98,6 @@ void BSTNode::DeleteChild(BSTNode* child)
 		rightChild = nullptr;
 }
 
-int BSTNode::GetNodeAmount()
-{
-	int nodeAmount = 1;
-	if (leftChild != nullptr)
-	{
-		nodeAmount += leftChild->GetNodeAmount();
-	}
-	if (rightChild != nullptr)
-	{
-		nodeAmount += rightChild->GetNodeAmount();
-	}
-	return nodeAmount;
-}
-
 string BSTNode::ToString()
 {	
 	return "[" + to_string(key) + "]";
@@ -119,5 +105,10 @@ string BSTNode::ToString()
 
 BSTNode* BSTNode::GetSmallest()
 {
-	return leftChild == nullptr ? this : leftChild->GetSmallest();
+	BSTNode* current = this;
+	while (current->leftChild != nullptr)
+	{
+		current = current->leftChild;
+	}
+	return current;
 }

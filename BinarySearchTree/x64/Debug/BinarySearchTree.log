@@ -1,5 +1,8 @@
 ﻿  BinarySearchTree.cpp
-C:\Users\casfah-4\LTU\_Programming_\Year-1\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(17,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\casfah-4\LTU\_Programming_\Year-1\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(28,28): warning C4018: '<': signed/unsigned mismatch
-C:\Users\casfah-4\LTU\_Programming_\Year-1\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(35,32): warning C4018: '<': signed/unsigned mismatch
-  BinarySearchTree.vcxproj -> C:\Users\casfah-4\LTU\_Programming_\Year-1\BinarySearchTree\x64\Debug\BinarySearchTree.exe
+F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(18,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(26,28): warning C4018: '<': signed/unsigned mismatch
+F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(31,32): warning C4018: '<': signed/unsigned mismatch
+F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(50,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(58,28): warning C4018: '<': signed/unsigned mismatch
+F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(64,32): warning C4018: '<': signed/unsigned mismatch
+  BinarySearchTree.vcxproj -> F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\x64\Debug\BinarySearchTree.exe

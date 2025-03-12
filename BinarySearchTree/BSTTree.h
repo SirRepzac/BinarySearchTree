@@ -13,6 +13,7 @@ class BSTTree
 
 	float c;
 
+
 	BSTNode* FindAlgo(int key, BSTNode* currentNode);
 	void InsertAlgo(int key, BSTNode* currentNode);
 	bool CheckIfRebalanceIsNeeded(BSTNode* node);
@@ -23,7 +24,6 @@ class BSTTree
 
 	void Rebalance();
 
-
 public:
 	BSTTree();
 	BSTNode* Find(int key);
@@ -32,6 +32,7 @@ public:
 	void Delete(BSTNode* node);
 	void DeleteTree();
 
+	bool isBalancedTree = true;
 
 
 	// Only for printing
