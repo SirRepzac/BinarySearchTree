@@ -22,9 +22,6 @@ int main()
         values.push_back(random);
     }
 
-    //std::mt19937 rng(std::random_device{}());
-    //std::uniform_int_distribution<int> dist(0, 999);
-    //auto generateRandom = [&]() -> int { return dist(rng); };
     for (unsigned z = 0; z < cycle_test; ++z) {
 
         t.DeleteTree();

@@ -57,18 +57,11 @@ void BSTTree::InsertAlgo(int key, BSTNode* currentNode)
 
 		// Update nodeAmount
 		BSTNode* parentNode = currentNode;
-		for (int i = 0; i < head->nodeAmount + 1 ; i++)
+
+		while (parentNode->parent != nullptr)
 		{
 			parentNode->nodeAmount++;
-
-			if (parentNode->parent != nullptr) 
-			{
-				parentNode = parentNode->parent;
-			}
-			else 
-			{
-				break;
-			}
+			parentNode = parentNode->parent;
 		}
 	}
 	else
@@ -107,6 +100,13 @@ void BSTTree::Delete(BSTNode* node)
 			node->parent->DeleteChild(node);
 		}
 
+		BSTNode* parentNode = node->parent;
+		while (parentNode->parent != nullptr)
+		{
+			parentNode->nodeAmount--;
+			parentNode = parentNode->parent;
+		}
+
 		delete node;
 		return;
 	}
@@ -128,6 +128,14 @@ void BSTTree::Delete(BSTNode* node)
 			else
 				node->parent->rightChild = child;
 		}
+
+		BSTNode* parentNode = node->parent;
+		while (parentNode->parent != nullptr)
+		{
+			parentNode->nodeAmount--;
+			parentNode = parentNode->parent;
+		}
+
 		delete node;
 		return;
 	}
@@ -150,7 +158,6 @@ void BSTTree::DeleteTree()
 	for (int i = 0; i < nodes.size(); i++)
 	{
 		delete nodes[i];
-		//nodes.pop_back();
 	}
 
 	head = nullptr;
@@ -168,7 +175,7 @@ bool BSTTree::CheckIfRebalanceIsNeeded(BSTNode* node)
 	{
 		if (node->leftChild != nullptr)
 		{
-			if (node->leftChild->nodeAmount + 1 > c * (node->nodeAmount + 1))
+			if (node->leftChild->nodeAmount > c * node->nodeAmount)
 			{
 				return true;
 			}
@@ -181,7 +188,7 @@ bool BSTTree::CheckIfRebalanceIsNeeded(BSTNode* node)
 		if (node->rightChild != nullptr)
 		{
 
-			if (node->rightChild->nodeAmount + 1 > c * (node->nodeAmount + 1))
+			if (node->rightChild->nodeAmount + 1 > c * node->nodeAmount)
 			{
 				return true;
 			}
@@ -235,11 +242,6 @@ void BSTTree::Rebalance()
 	// then keep making the middle between start and current node as the left child and the middle between current node and stop as the right child 
 	head = BuildBalancedTree(nodes, 0, nodes.size() - 1);
 	head->parent = nullptr;
-
-	for (int i = 0; i < nodes.size(); i++)
-	{
-		nodes[i]->nodeAmount = nodes[i]->GetNodeAmount();
-	}
 }
 
 void BSTTree::InOrderTraversalWithDepth(BSTNode* node, vector<pair<BSTNode*, int>>& nodesWithDepth, int depth)
