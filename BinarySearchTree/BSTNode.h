@@ -6,11 +6,14 @@
 using namespace std;
 
 class BSTTree;
+class BSTTreeUnbalanced;
 
 class BSTNode
 {
 
 	friend BSTTree;
+	friend BSTTreeUnbalanced;
+
 	int key;
 
 	int nodeAmount;

@@ -130,12 +130,14 @@
     <ClCompile Include="BinarySearchTree.cpp" />
     <ClCompile Include="BSTNode.cpp" />
     <ClCompile Include="BSTTree.cpp" />
+    <ClCompile Include="BSTTreeUnbalanced.cpp" />
     <ClCompile Include="BTreeNode.cpp" />
     <ClCompile Include="BTreeTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BSTNode.h" />
     <ClInclude Include="BSTTree.h" />
+    <ClInclude Include="BSTTreeUnbalanced.h" />
     <ClInclude Include="BTreeNode.h" />
     <ClInclude Include="BTreeTree.h" />
   </ItemGroup>

@@ -15,14 +15,25 @@ class BSTTree
 
 
 	BSTNode* FindAlgo(int key, BSTNode* currentNode);
-	void InsertAlgo(int key, BSTNode* currentNode);
-	bool CheckIfRebalanceIsNeeded(BSTNode* node);
+	BSTNode* InsertAndTrack(BSTNode* node, int value, BSTNode*& unbalancedNode);
+	double GetBalanceFactor(BSTNode* node);
+	void RebalanceAt(BSTNode* node);
 
+	BSTNode* RotateRight(BSTNode* node);
+
+	BSTNode* RotateLeft(BSTNode* node);
+
+	BSTNode* RotateLeftRight(BSTNode* node);
+
+	BSTNode* RotateRightLeft(BSTNode* node);
+
+
+
+	BSTNode* FindUnbalancedNode(BSTNode* node);
+	void UpdateNodeAmount(BSTNode* node);
 	void InOrderTraversal(BSTNode* node, vector<BSTNode*>& nodes);
-
-	BSTNode* BuildBalancedTree(vector<BSTNode*>& nodes, int start, int end);
-
 	void Rebalance();
+	bool CheckIfRebalanceIsNeeded(BSTNode* node);
 
 public:
 	BSTTree();
@@ -31,12 +42,4 @@ public:
 	void Delete(int key);
 	void Delete(BSTNode* node);
 	void DeleteTree();
-
-	bool isBalancedTree = true;
-
-
-	// Only for printing
-	string ToString();
-private:
-	void InOrderTraversalWithDepth(BSTNode* node, vector<pair<BSTNode*, int>>& nodesWithDepth, int depth);
 };

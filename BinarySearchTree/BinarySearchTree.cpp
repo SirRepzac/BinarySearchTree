@@ -1,12 +1,14 @@
 #include <iostream>
 #include "BSTTree.h"
+#include "BSTTreeUnbalanced.h"
 #include <chrono>
 #include <algorithm>
 #include <random>
 
+
 using namespace std::chrono;
 using namespace std;
-int x = 10000;
+int x = 100000;
 int cycle_test = 1000;
 
 int main()
@@ -41,17 +43,7 @@ int main()
     cout << "Average time (balanced): " << (total_time / cycle_test) / 1'000'000 << " seconds" << endl;
 
     total_time = 0;
-    BSTTree u = BSTTree();
-    u.isBalancedTree = false;
-    vector<int> values2;
-
-    srand(time(NULL));
-
-    for (int i = 0; i < x; i++)
-    {
-        int random = rand() % x;
-        values2.push_back(random);
-    }
+    BSTTreeUnbalanced u = BSTTreeUnbalanced();
 
     for (unsigned z = 0; z < cycle_test; ++z)
     {
@@ -61,7 +53,7 @@ int main()
         auto start = high_resolution_clock::now();
         for (unsigned i = 0; i < x; ++i)
         {
-            int p = values2[i];
+            int p = values[i];
             u.Insert(p);
         }
         auto stop = high_resolution_clock::now();
