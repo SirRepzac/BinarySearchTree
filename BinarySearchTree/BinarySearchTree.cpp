@@ -8,7 +8,7 @@
 
 using namespace std::chrono;
 using namespace std;
-int x = 100000;
+int x = 10000;
 int cycle_test = 1000;
 
 int main()
@@ -23,6 +23,13 @@ int main()
     {
         int random = rand() % x;
         values.push_back(random);
+    }
+
+    // This makes the values be in order
+    values.clear();
+    for (int i = 0; i < x; i++)
+    {
+        values.push_back(i);
     }
 
     for (unsigned z = 0; z < cycle_test; ++z) {

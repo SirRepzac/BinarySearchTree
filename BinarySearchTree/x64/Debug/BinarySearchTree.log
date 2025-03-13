@@ -1,7 +1,10 @@
-﻿  BinarySearchTree.cpp
+﻿  BSTTree.cpp
+F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BSTTree.cpp(244,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  BinarySearchTree.cpp
 F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(20,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(28,28): warning C4018: '<': signed/unsigned mismatch
-F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(33,32): warning C4018: '<': signed/unsigned mismatch
-F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(48,28): warning C4018: '<': signed/unsigned mismatch
-F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(54,32): warning C4018: '<': signed/unsigned mismatch
+F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(35,28): warning C4018: '<': signed/unsigned mismatch
+F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(40,32): warning C4018: '<': signed/unsigned mismatch
+F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(55,28): warning C4018: '<': signed/unsigned mismatch
+F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\BinarySearchTree\BinarySearchTree.cpp(61,32): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
   BinarySearchTree.vcxproj -> F:\LTU\_Programming_\Year-1\Datastructures_And_Algorithms\Lab-3\BinarySearchTree\x64\Debug\BinarySearchTree.exe

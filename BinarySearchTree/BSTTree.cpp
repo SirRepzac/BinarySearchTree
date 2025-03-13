@@ -1,6 +1,7 @@
 #include "BSTTree.h"
 #include <queue>
 #include <sstream>
+#include <stack>
 
 using namespace std;
 
@@ -26,44 +27,62 @@ BSTNode* BSTTree::FindAlgo(int key, BSTNode* currentNode)
 	return FindAlgo(key, currentNode->GetNextNode(key));
 }
 
-void BSTTree::Insert(int value)
+void BSTTree::Insert(int key)
 {
-	BSTNode* unbalancedNode = nullptr;
-	head = InsertAndTrack(head, value, unbalancedNode);
-	
-	if (unbalancedNode)
+
+	if (!head)
 	{
-		RebalanceAt(unbalancedNode);
+		head = new BSTNode(key);
+		return;
 	}
-}
 
-BSTNode* BSTTree::InsertAndTrack(BSTNode* node, int key, BSTNode*& unbalancedNode)
-{
-	if (!node) return new BSTNode(key);
+	BSTNode* current = head;
+	BSTNode* parent = nullptr;
 
-	if (key < node->key)
+	while (current)
 	{
-		node->leftChild = InsertAndTrack(node->leftChild, key, unbalancedNode);
-		node->leftChild->parent = node;
+		parent = current;
+
+		if (key == current->key)
+		{
+			return; // Key already exists, bounce
+		}
+		else if (key < current->key)
+		{
+			current = current->leftChild;
+		}
+		else
+		{
+			current = current->rightChild;
+		}
+	}
+
+	BSTNode* newNode = new BSTNode(key);
+
+	// Insert at the correct position
+	newNode->parent = parent;
+	if (key < parent->key)
+	{
+		parent->leftChild = newNode;
 	}
 	else
 	{
-		node->rightChild = InsertAndTrack(node->rightChild, key, unbalancedNode);
-		node->rightChild->parent = node;
+		parent->rightChild = newNode;
 	}
 
-	// Update nodeAmount during insertion
-	node->nodeAmount = 1 + (node->leftChild ? node->leftChild->nodeAmount : 0)
-		+ (node->rightChild ? node->rightChild->nodeAmount : 0);
-
-	// Check balance factor **only once per insert**
-	int balanceFactor = GetBalanceFactor(node);
-	if (abs(balanceFactor) > 1 && !unbalancedNode)
+	// Update nodeAmount upwards
+	while (parent)
 	{
-		unbalancedNode = node;  // Store first unbalanced node
+		UpdateNodeAmount(parent);
+
+		// Check if rebalancing is needed
+		if (CheckIfRebalanceIsNeeded(parent))
+		{
+			RebalanceAt(parent);
+		}
+		parent = parent->parent;
 	}
 
-	return node;
 }
 
 double BSTTree::GetBalanceFactor(BSTNode* node)
@@ -79,49 +98,20 @@ double BSTTree::GetBalanceFactor(BSTNode* node)
 	double leftRatio = static_cast<double>(leftSize) / totalSize;
 	double rightRatio = static_cast<double>(rightSize) / totalSize;
 
-	return std::max(leftRatio, rightRatio); // Max ratio determines balance
+	if (leftRatio > rightRatio)
+	{
+		return -leftRatio;
+	}
+	else
+	{
+		return rightRatio;
+	}
 }
 
 bool BSTTree::CheckIfRebalanceIsNeeded(BSTNode* node)
 {
 	if (!node) return false;
-	return GetBalanceFactor(node) > c;
-}
-
-void BSTTree::RebalanceAt(BSTNode* node)
-{
-	if (!node) return;
-
-	int balanceFactor = GetBalanceFactor(node);
-
-	// LL Case (Right Rotation)
-	if (balanceFactor > 1 && GetBalanceFactor(node->leftChild) >= 0)
-	{
-		node = RotateRight(node);
-	}
-	// RR Case (Left Rotation)
-	else if (balanceFactor < -1 && GetBalanceFactor(node->rightChild) <= 0)
-	{
-		node = RotateLeft(node);
-	}
-	// LR Case (Left-Right Rotation)
-	else if (balanceFactor > 1 && GetBalanceFactor(node->leftChild) < 0)
-	{
-		node->leftChild = RotateLeft(node->leftChild);
-		node = RotateRight(node);
-	}
-	// RL Case (Right-Left Rotation)
-	else if (balanceFactor < -1 && GetBalanceFactor(node->rightChild) > 0)
-	{
-		node->rightChild = RotateRight(node->rightChild);
-		node = RotateLeft(node);
-	}
-
-	// If the node was root, update head
-	if (!node->parent)
-	{
-		head = node;
-	}
+	return abs(GetBalanceFactor(node)) > c;
 }
 
 void BSTTree::DeleteTree()
@@ -140,12 +130,29 @@ void BSTTree::DeleteTree()
 
 void BSTTree::InOrderTraversal(BSTNode* node, vector<BSTNode*>& nodes)
 {
-	if (node == nullptr)
-		return;
 
-	InOrderTraversal(node->leftChild, nodes);
-	nodes.push_back(node);
-	InOrderTraversal(node->rightChild, nodes);
+	stack<BSTNode*> stack;
+	BSTNode* current = head;
+
+	// Traverse the tree
+	while (current != nullptr || !stack.empty())
+	{
+		// Reach the leftmost node of the current node
+		while (current != nullptr)
+		{
+			stack.push(current);
+			current = current->leftChild;
+		}
+
+		// Pop the node from the stack and add it to the result
+		current = stack.top();
+		stack.pop();
+		nodes.push_back(current);
+
+		// Now, visit the right child
+		current = current->rightChild;
+	}
+
 }
 
 BSTNode* BSTTree::RotateRight(BSTNode* node)
@@ -216,18 +223,6 @@ BSTNode* BSTTree::RotateLeft(BSTNode* node)
 	return newRoot;
 }
 
-BSTNode* BSTTree::RotateLeftRight(BSTNode* node)
-{
-	node->leftChild = RotateLeft(node->leftChild);
-	return RotateRight(node);
-}
-
-BSTNode* BSTTree::RotateRightLeft(BSTNode* node)
-{
-	node->rightChild = RotateRight(node->rightChild);
-	return RotateLeft(node);
-}
-
 void BSTTree::UpdateNodeAmount(BSTNode* node)
 {
 	if (!node) return;
@@ -242,66 +237,39 @@ void BSTTree::UpdateNodeAmount(BSTNode* node)
 	}
 }
 
-// NOT IMPORTANT BELOW
-
-BSTNode* BSTTree::FindUnbalancedNode(BSTNode* node)
+void BSTTree::RebalanceAt(BSTNode* node)
 {
-	if (node == nullptr) return nullptr;
+	if (!node) return;
 
-	int leftSize = (node->leftChild) ? node->leftChild->nodeAmount : 0;
-	int rightSize = (node->rightChild) ? node->rightChild->nodeAmount : 0;
+	float balanceFactor = GetBalanceFactor(node);
 
-	if (leftSize > c * node->nodeAmount || rightSize > c * node->nodeAmount)
+	// LL Case (Right Rotation)
+	if (balanceFactor < 0 && GetBalanceFactor(node->leftChild) <= 0)
 	{
-		return node;
+		node = RotateRight(node);
+	}
+	// RR Case (Left Rotation)
+	else if (balanceFactor > 0 && GetBalanceFactor(node->rightChild) >= 0)
+	{
+		node = RotateLeft(node);
+	}
+	// LR Case (Left-Right Rotation)
+	else if (balanceFactor < 0 && GetBalanceFactor(node->leftChild) > 0)
+	{
+		node->leftChild = RotateLeft(node->leftChild);
+		node = RotateRight(node);
+	}
+	// RL Case (Right-Left Rotation)
+	else if (balanceFactor > 0 && GetBalanceFactor(node->rightChild) < 0)
+	{
+		node->rightChild = RotateRight(node->rightChild);
+		node = RotateLeft(node);
 	}
 
-	BSTNode* leftUnbalanced = FindUnbalancedNode(node->leftChild);
-
-	if (leftUnbalanced)
-		return leftUnbalanced;
-
-	return FindUnbalancedNode(node->rightChild);
-}
-
-void BSTTree::Rebalance()
-{
-	BSTNode* unbalancedNode = FindUnbalancedNode(head);
-	if (!unbalancedNode) return; // No need to rebalance
-
-	int leftSize = (unbalancedNode->leftChild) ? unbalancedNode->leftChild->nodeAmount : 0;
-	int rightSize = (unbalancedNode->rightChild) ? unbalancedNode->rightChild->nodeAmount : 0;
-	int balanceFactor = leftSize - rightSize;
-
-	// LL Case (Left-heavy)
-	if (balanceFactor > 1)
+	// If the node was root, update head
+	if (!node->parent)
 	{
-		if (unbalancedNode->leftChild && unbalancedNode->leftChild->leftChild)
-		{
-			unbalancedNode = RotateRight(unbalancedNode);
-		}
-		else
-		{
-			unbalancedNode = RotateLeftRight(unbalancedNode);
-		}
-	}
-	// RR Case (Right-heavy)
-	else if (balanceFactor < -1)
-	{
-		if (unbalancedNode->rightChild && unbalancedNode->rightChild->rightChild)
-		{
-			unbalancedNode = RotateLeft(unbalancedNode);
-		}
-		else
-		{
-			unbalancedNode = RotateRightLeft(unbalancedNode);
-		}
-	}
-
-	// Update root if necessary
-	if (!unbalancedNode->parent)
-	{
-		head = unbalancedNode;
+		head = node;
 	}
 }
 
@@ -316,8 +284,10 @@ void BSTTree::Delete(int key)
 
 	Delete(nodeWithKey);
 
-
-	Rebalance();
+	if (CheckIfRebalanceIsNeeded(head))
+	{
+		RebalanceAt(head);
+	}
 }
 
 void BSTTree::Delete(BSTNode* node)

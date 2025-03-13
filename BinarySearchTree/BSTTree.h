@@ -15,24 +15,16 @@ class BSTTree
 
 
 	BSTNode* FindAlgo(int key, BSTNode* currentNode);
-	BSTNode* InsertAndTrack(BSTNode* node, int value, BSTNode*& unbalancedNode);
 	double GetBalanceFactor(BSTNode* node);
-	void RebalanceAt(BSTNode* node);
 
 	BSTNode* RotateRight(BSTNode* node);
 
 	BSTNode* RotateLeft(BSTNode* node);
 
-	BSTNode* RotateLeftRight(BSTNode* node);
-
-	BSTNode* RotateRightLeft(BSTNode* node);
-
-
-
-	BSTNode* FindUnbalancedNode(BSTNode* node);
 	void UpdateNodeAmount(BSTNode* node);
 	void InOrderTraversal(BSTNode* node, vector<BSTNode*>& nodes);
-	void Rebalance();
+	void RebalanceAt(BSTNode* node);
+
 	bool CheckIfRebalanceIsNeeded(BSTNode* node);
 
 public:

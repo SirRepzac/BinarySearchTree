@@ -1,4 +1,5 @@
 #include "BSTTreeUnbalanced.h"
+#include <stack>
 
 BSTTreeUnbalanced::BSTTreeUnbalanced()
 {
@@ -25,42 +26,50 @@ void BSTTreeUnbalanced::Insert(int key)
 {
 	if (head == nullptr)
 	{
-		BSTNode* newHead = new BSTNode(key);
-		head = newHead;
-	}
-	else
-	{
-		InsertAlgo(key, head);
-	}
-}
-
-void BSTTreeUnbalanced::InsertAlgo(int key, BSTNode* currentNode)
-{
-	if (key == currentNode->key)
-	{
+		head = new BSTNode(key);
 		return;
 	}
 
-	BSTNode* nextNode = currentNode->GetNextNode(key);
+	BSTNode* currentNode = head;
+	BSTNode* parent = nullptr;
 
-	if (nextNode == nullptr)
+	// Iterative traversal to find insertion point
+	while (currentNode)
 	{
-		currentNode->SetNewChild(key);
-
-		// Update nodeAmount
-		BSTNode* parentNode = currentNode;
-
-		while (parentNode->parent != nullptr)
+		parent = currentNode;
+		if (key == currentNode->key)
 		{
-			parentNode->nodeAmount++;
-			parentNode = parentNode->parent;
+			return; // Key already exists, no duplicates allowed
 		}
-		// Add to nodeAmount for head
-		parentNode->nodeAmount++;
+		else if (key < currentNode->key)
+		{
+			currentNode = currentNode->leftChild;
+		}
+		else
+		{
+			currentNode = currentNode->rightChild;
+		}
+	}
+
+	// Create new node
+	BSTNode* newNode = new BSTNode(key);
+	newNode->parent = parent;
+
+	// Attach to correct side
+	if (key < parent->key)
+	{
+		parent->leftChild = newNode;
 	}
 	else
 	{
-		InsertAlgo(key, nextNode);
+		parent->rightChild = newNode;
+	}
+
+	// Update nodeAmount upwards
+	while (parent)
+	{
+		parent->nodeAmount++;
+		parent = parent->parent;
 	}
 }
 
@@ -80,12 +89,27 @@ void BSTTreeUnbalanced::DeleteTree()
 
 void BSTTreeUnbalanced::InOrderTraversal(BSTNode* node, vector<BSTNode*>& nodes)
 {
-	if (node == nullptr)
-		return;
+	stack<BSTNode*> stack;
+	BSTNode* current = head;
 
-	InOrderTraversal(node->leftChild, nodes);
-	nodes.push_back(node);
-	InOrderTraversal(node->rightChild, nodes);
+	// Traverse the tree
+	while (current != nullptr || !stack.empty())
+	{
+		// Reach the leftmost node of the current node
+		while (current != nullptr)
+		{
+			stack.push(current);
+			current = current->leftChild;
+		}
+
+		// Pop the node from the stack and add it to the result
+		current = stack.top();
+		stack.pop();
+		nodes.push_back(current);
+
+		// Now, visit the right child
+		current = current->rightChild;
+	}
 }
 
 

@@ -13,7 +13,6 @@ class BSTTreeUnbalanced
 	BSTNode* head;
 
 	BSTNode* FindAlgo(int key, BSTNode* currentNode);
-	void InsertAlgo(int key, BSTNode* currentNode);
 
 	void InOrderTraversal(BSTNode* node, vector<BSTNode*>& nodes);
 

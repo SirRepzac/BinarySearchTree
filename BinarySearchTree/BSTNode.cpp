@@ -4,7 +4,7 @@ using namespace std;
 
 BSTNode::BSTNode()
 {
-	nodeAmount = 0;
+	nodeAmount = 1;
 	this->key = 0;
 	parent = nullptr;
 	leftChild = nullptr;
@@ -13,7 +13,7 @@ BSTNode::BSTNode()
 
 BSTNode::BSTNode(int key)
 {
-	nodeAmount = 0;
+	nodeAmount = 1;
 	this->key = key;
 	parent = nullptr;
 	leftChild = nullptr;
